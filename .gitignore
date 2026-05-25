@@ -28,6 +28,9 @@ ios/build/
 !.env.example
 !web/.env.example
 
+# Video analyzer frames (large binary files)
+video-analyzer/screens/
+
 # Local caches
 .cache/
 .parcel-cache/
