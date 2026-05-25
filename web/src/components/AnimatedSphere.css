@@ -1,0 +1,56 @@
+.sphere-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.sphere {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.sphere:hover {
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+}
+
+.sphere-gradient {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #d4a574 0%, #c9a961 50%, #b8944e 100%);
+  box-shadow: inset -10px -10px 20px rgba(0, 0, 0, 0.1),
+    inset 10px 10px 20px rgba(255, 255, 255, 0.3);
+}
+
+.sphere-shine {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4), transparent);
+  top: 20px;
+  left: 20px;
+}
+
+@media (max-width: 768px) {
+  .sphere {
+    width: 150px;
+    height: 150px;
+  }
+
+  .sphere-shine {
+    width: 45px;
+    height: 45px;
+  }
+}
