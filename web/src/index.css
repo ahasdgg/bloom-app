@@ -2,6 +2,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  /* Prevent font size inflation on iOS */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -9,30 +16,51 @@ body {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: transparent;
-  min-height: 100vh;
+  background: var(--bg0, var(--bg, #070A12));
+  color: var(--text-1, #EEF2FF);
+  min-height: 100dvh;
+  overscroll-behavior: none;
 }
 
 #root {
   width: 100%;
-  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--bg0, var(--bg, #070A12));
 }
 
-/* Scrollbar styling */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+/* Minimum touch target size — 44px */
+button, a, [role="button"] {
+  min-height: 44px;
+  min-width: 44px;
+  cursor: pointer;
 }
 
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
+/* Smooth scrolling on iOS */
+* {
+  -webkit-overflow-scrolling: touch;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #b8944e;
-  border-radius: 4px;
+/* Hide scrollbars on mobile */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar { display: none; }
+  * { scrollbar-width: none; }
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #a0804a;
+/* Desktop scrollbar */
+@media (min-width: 769px) {
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border2, rgba(255,255,255,0.16)); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.22); }
+}
+
+/* Prevent text selection on UI elements */
+button, .nav-item, .chip, .cat-btn {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Input zoom prevention on iOS (font-size >= 16px) */
+input, textarea, select {
+  font-size: 16px !important;
 }

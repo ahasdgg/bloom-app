@@ -47,8 +47,7 @@ interface ExtractedEvent {
 
 // ─── Gemini text analysis ─────────────────────────────────────────────────────
 
-const API_KEY = 'AIzaSyCpylP_3TS0kWAQSdHVWcxwxotoifsgfx0'
-const GEMINI_TEXT_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${API_KEY}`
+const API_KEY = (import.meta as any)?.env?.VITE_GEMINI_API_KEY as string | undefined
 
 const TEXT_PROMPT = `Ты — ассистент Bloom App. Пользователь описывает своё расписание текстом. 
 Извлеки все события и верни ТОЛЬКО чистый JSON без дополнительного текста:
@@ -59,6 +58,11 @@ const TEXT_PROMPT = `Ты — ассистент Bloom App. Пользовате
 Цвета подбирай сам по смыслу события.`
 
 async function analyzeText(text: string): Promise<ImportResult> {
+  if (!API_KEY) {
+    throw new Error('Gemini API key is not configured (VITE_GEMINI_API_KEY)')
+  }
+
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${API_KEY}`
   const body = {
     contents: [{
       parts: [
@@ -67,7 +71,7 @@ async function analyzeText(text: string): Promise<ImportResult> {
       ]
     }]
   }
-  const res = await fetch(GEMINI_TEXT_URL, {
+  const res = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
@@ -141,6 +145,31 @@ const ChatScreen: React.FC = () => {
     setAttachedFiles(prev => [...prev, ...valid].slice(0, 5))
     setAttachedUrls(prev => [...prev, ...valid.map(f => URL.createObjectURL(f))].slice(0, 5))
     e.target.value = ''
+  }
+
+  // ── Paste from clipboard (Ctrl+V) ────────────────────────────────────────────
+
+  const handlePaste = (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
+    const items = Array.from(e.clipboardData.items)
+    const imageItems = items.filter(item => item.type.startsWith('image/'))
+    if (imageItems.length === 0) return
+
+    e.preventDefault()
+    const newFiles: File[] = []
+    const newUrls: string[] = []
+
+    imageItems.forEach(item => {
+      const file = item.getAsFile()
+      if (!file) return
+      // Accept any image from clipboard (screenshots are image/png)
+      newFiles.push(file)
+      newUrls.push(URL.createObjectURL(file))
+    })
+
+    if (newFiles.length > 0) {
+      setAttachedFiles(prev => [...prev, ...newFiles].slice(0, 5))
+      setAttachedUrls(prev => [...prev, ...newUrls].slice(0, 5))
+    }
   }
 
   const removeAttachment = (i: number) => {
@@ -381,6 +410,7 @@ const ChatScreen: React.FC = () => {
             value={input}
             onChange={handleInput}
             onKeyDown={handleKeyDown}
+            onPaste={handlePaste}
             rows={1}
           />
           <button

@@ -33,22 +33,22 @@ function tsFromTimeStr(dateStr: string, timeStr: string): number {
 }
 
 const CAT_COLOR: Record<string, { bg: string; border: string; text: string }> = {
-  work:       { bg: "#e8eaf6", border: "#5c6bc0", text: "#3949ab" },
-  study:      { bg: "#e3f2fd", border: "#42a5f5", text: "#1565c0" },
-  fitness:    { bg: "#fce4ec", border: "#ef5350", text: "#c62828" },
-  hiking:     { bg: "#e8f5e9", border: "#66bb6a", text: "#2e7d32" },
-  cycling:    { bg: "#fff3e0", border: "#ffa726", text: "#e65100" },
-  yoga:       { bg: "#f3e5f5", border: "#ab47bc", text: "#6a1b9a" },
-  arts:       { bg: "#fff8e1", border: "#ffca28", text: "#f57f17" },
-  culture:    { bg: "#e0f2f1", border: "#26a69a", text: "#00695c" },
-  food:       { bg: "#fbe9e7", border: "#ff7043", text: "#bf360c" },
-  social:     { bg: "#e8eaf6", border: "#7986cb", text: "#283593" },
-  relaxation: { bg: "#f1f8e9", border: "#9ccc65", text: "#33691e" },
-  adventure:  { bg: "#fff3e0", border: "#ff8f00", text: "#e65100" },
-  nature:     { bg: "#e8f5e9", border: "#43a047", text: "#1b5e20" },
-  family:     { bg: "#fce4ec", border: "#f48fb1", text: "#880e4f" },
-  custom:     { bg: "#e8eaf6", border: "#7c4dff", text: "#4527a0" },
-  default:    { bg: "#f5f1e8", border: "#b8944e", text: "#5d4037" },
+  work:       { bg: "#8B5CF622", border: "#8B5CF6", text: "#EDE9FE" },
+  study:      { bg: "#22D3EE22", border: "#22D3EE", text: "#ECFEFF" },
+  fitness:    { bg: "#FB718522", border: "#FB7185", text: "#FFF1F2" },
+  hiking:     { bg: "#22C55E22", border: "#22C55E", text: "#DCFCE7" },
+  cycling:    { bg: "#F59E0B22", border: "#F59E0B", text: "#FFFBEB" },
+  yoga:       { bg: "#A78BFA22", border: "#A78BFA", text: "#F5F3FF" },
+  arts:       { bg: "#FBBF2422", border: "#FBBF24", text: "#FFFBEB" },
+  culture:    { bg: "#2DD4BF22", border: "#2DD4BF", text: "#ECFEFF" },
+  food:       { bg: "#FB923C22", border: "#FB923C", text: "#FFF7ED" },
+  social:     { bg: "#60A5FA22", border: "#60A5FA", text: "#EFF6FF" },
+  relaxation: { bg: "#34D39922", border: "#34D399", text: "#ECFDF5" },
+  adventure:  { bg: "#F9731622", border: "#F97316", text: "#FFF7ED" },
+  nature:     { bg: "#16A34A22", border: "#16A34A", text: "#DCFCE7" },
+  family:     { bg: "#F472B622", border: "#F472B6", text: "#FDF2F8" },
+  custom:     { bg: "#8B5CF622", border: "#8B5CF6", text: "#EEF2FF" },
+  default:    { bg: "#B8944E22", border: "#B8944E", text: "#FFF7ED" },
 }
 function catColor(cat: string) { return CAT_COLOR[cat] ?? CAT_COLOR.default }
 
@@ -293,7 +293,7 @@ const PathScreen: React.FC = () => {
                     style={{
                       top: yTop, left: `calc(${50 + xOff}% - ${CARD_W / 2}px + ${shift}px)`,
                       minHeight: heightPx, width: CARD_W,
-                      background: isNow ? `linear-gradient(135deg, ${colors.bg}, #fff)` : colors.bg,
+                      background: isNow ? `linear-gradient(135deg, ${colors.bg}, rgba(255,255,255,0.06))` : colors.bg,
                       borderColor: colors.border, color: colors.text,
                       boxShadow: isNow ? `0 0 0 2px ${colors.border}, 0 8px 24px ${colors.border}44` : `0 2px 10px ${colors.border}33`,
                       opacity: isPast ? 0.65 : 1,

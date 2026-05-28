@@ -5,7 +5,7 @@
   flex-direction: column;
   height: 100vh;
   height: 100dvh;
-  background: var(--bg);
+  background: transparent;
   padding-bottom: var(--nav-h, 64px);
 }
 
@@ -17,7 +17,7 @@
   justify-content: space-between;
   padding: 14px 16px 12px;
   border-bottom: 1px solid var(--border);
-  background: rgba(255,255,255,0.6);
+  background: rgba(15,22,48,0.72);
   backdrop-filter: blur(12px);
   flex-shrink: 0;
 }
@@ -112,7 +112,7 @@
 }
 
 .chat-bubble.assistant {
-  background: var(--surface);
+  background: var(--surface2);
   color: var(--text-1);
   border: 1px solid var(--border);
   border-bottom-left-radius: 4px;
@@ -178,7 +178,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: var(--bg);
+  background: var(--bg2);
   border: 1.5px solid var(--border);
   border-radius: var(--radius-s);
   padding: 8px 10px;
@@ -261,9 +261,11 @@
 .chat-input-area {
   flex-shrink: 0;
   border-top: 1px solid var(--border);
-  background: rgba(255,255,255,0.7);
+  background: rgba(15,22,48,0.82);
   backdrop-filter: blur(12px);
-  padding: 8px 12px 10px;
+  -webkit-backdrop-filter: blur(12px);
+  padding: 8px 12px;
+  padding-bottom: calc(8px + env(safe-area-inset-bottom));
 }
 
 /* Attachment previews */
@@ -314,22 +316,23 @@
 }
 
 .chat-attach-btn {
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: 1.5px solid var(--border2);
-  background: var(--surface);
-  font-size: 18px;
+  background: var(--surface2);
+  font-size: 20px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: border-color 0.15s;
+  transition: border-color 0.15s, transform 0.1s;
   line-height: 1;
 }
 
 .chat-attach-btn:hover { border-color: var(--accent2); }
+.chat-attach-btn:active { transform: scale(0.92); }
 
 .chat-input {
   flex: 1;
@@ -338,7 +341,7 @@
   border-radius: 20px;
   font-size: 14px;
   color: var(--text-1);
-  background: var(--bg);
+  background: var(--bg2);
   outline: none;
   resize: none;
   font-family: var(--font);

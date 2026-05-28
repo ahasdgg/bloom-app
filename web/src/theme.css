@@ -16,20 +16,22 @@
    ═══════════════════════════════════════════════════ */
 
 :root {
-  /* Trendy light base (calm, premium) */
-  --bg:       #f6f7fb;
-  --surface:  rgba(255,255,255,0.72);
-  --surface2: rgba(255,255,255,0.88);
-  --border:   rgba(17,24,39,0.08);
-  --border2:  rgba(17,24,39,0.12);
-  --text-1:   #0b1220;
-  --text-2:   rgba(11,18,32,0.78);
-  --text-3:   rgba(11,18,32,0.55);
+  --bg0:      #070A12;
+  --bg:       #0B1020;
+  --bg2:      #0F1630;
+  --surface:  rgba(255,255,255,0.06);
+  --surface2: rgba(255,255,255,0.09);
+  --surface3: rgba(255,255,255,0.12);
+  --border:   rgba(255,255,255,0.10);
+  --border2:  rgba(255,255,255,0.16);
+  --text-1:   #EEF2FF;
+  --text-2:   rgba(238,242,255,0.74);
+  --text-3:   rgba(238,242,255,0.50);
 
-  --accent:   #111827; /* neutral ink */
-  --accent2:  #7c3aed; /* violet */
-  --accent3:  #06b6d4; /* cyan */
-  --accent-grad: linear-gradient(135deg, rgba(124,58,237,1) 0%, rgba(6,182,212,1) 100%);
+  --accent:   #6D28D9;
+  --accent2:  #8B5CF6;
+  --accent3:  #22D3EE;
+  --accent-grad: linear-gradient(135deg, #8B5CF6 0%, #22D3EE 100%);
 
   --red:      #ef4444;
   --green:    #22c55e;
@@ -42,8 +44,14 @@
   --radius-xl:24px;
 
   --shadow-s: 0 1px 2px rgba(17,24,39,0.05), 0 6px 18px rgba(17,24,39,0.06);
-  --shadow-m: 0 2px 10px rgba(17,24,39,0.08), 0 18px 40px rgba(17,24,39,0.08);
-  --shadow-l: 0 10px 30px rgba(17,24,39,0.10), 0 30px 70px rgba(17,24,39,0.10);
+  --shadow-m: 0 10px 30px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.05) inset;
+  --shadow-l: 0 22px 70px rgba(0,0,0,0.55), 0 1px 0 rgba(255,255,255,0.06) inset;
+
+  --dur-1: 140ms;
+  --dur-2: 240ms;
+  --dur-3: 320ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ring: 0 0 0 2px rgba(139,92,246,0.40), 0 0 0 6px rgba(139,92,246,0.14);
 
   --nav-h:    64px;
   --font:     ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -51,13 +59,22 @@
 
 * { box-sizing: border-box; }
 
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+}
+
 body {
   font-family: var(--font);
   background:
-    radial-gradient(1200px 600px at 15% -10%, rgba(124,58,237,0.16), transparent 55%),
-    radial-gradient(1000px 520px at 105% 10%, rgba(6,182,212,0.14), transparent 50%),
+    radial-gradient(1200px 600px at 15% -10%, rgba(139,92,246,0.22), transparent 55%),
+    radial-gradient(1000px 520px at 105% 10%, rgba(34,211,238,0.18), transparent 50%),
     radial-gradient(900px 520px at 50% 110%, rgba(184,148,78,0.10), transparent 55%),
-    var(--bg);
+    var(--bg0);
   color: var(--text-1);
   margin: 0;
 }
@@ -132,14 +149,14 @@ body {
   height: 30px;
   border-radius: 50%;
   border: 1.5px solid var(--border2);
-  background: var(--bg);
+  background: var(--surface);
   font-size: 18px;
   cursor: pointer;
   color: var(--text-2);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.15s;
+  transition: all var(--dur-1) var(--ease-out);
 }
 
 .arr-btn:hover {
@@ -164,21 +181,21 @@ body {
   flex-shrink: 0;
   padding: 6px 14px;
   border-radius: 20px;
-  border: 1.5px solid var(--border2);
-  background: var(--bg);
+  border: 1.5px solid var(--border);
+  background: var(--surface);
   font-size: 12px;
   font-weight: 500;
   color: var(--text-2);
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all var(--dur-1) var(--ease-out);
   white-space: nowrap;
 }
 
 .chip:hover { border-color: #999; color: var(--text-1); }
 
 .chip.on {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: var(--accent-grad);
+  border-color: rgba(255,255,255,0.16);
   color: #fff;
 }
 
@@ -186,15 +203,17 @@ body {
 .card {
   border-radius: var(--radius-m);
   overflow: hidden;
-  background: var(--bg);
+  background: var(--surface2);
   box-shadow: var(--shadow-s);
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform var(--dur-2) var(--ease-out), box-shadow var(--dur-2) var(--ease-out), border-color var(--dur-2) var(--ease-out);
+  border: 1px solid var(--border);
 }
 
 .card:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-l);
+  border-color: rgba(139,92,246,0.35);
 }
 
 .card__img-box {
@@ -325,7 +344,7 @@ body {
 
 /* ── Primary button ──────────────────────────────── */
 .btn-primary {
-  background: var(--accent);
+  background: var(--accent-grad);
   color: #fff;
   border: none;
   border-radius: var(--radius-m);
@@ -334,15 +353,15 @@ body {
   font-weight: 700;
   cursor: pointer;
   width: 100%;
-  transition: opacity 0.15s, transform 0.15s;
+  transition: opacity var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out), box-shadow var(--dur-1) var(--ease-out);
 }
 
-.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn-primary:hover { opacity: 0.92; transform: translateY(-1px); box-shadow: 0 14px 40px rgba(139,92,246,0.18); }
 .btn-primary:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
 
 /* ── Secondary button ────────────────────────────── */
 .btn-secondary {
-  background: var(--surface);
+  background: var(--surface2);
   color: var(--text-2);
   border: 1.5px solid var(--border2);
   border-radius: var(--radius-m);
@@ -351,10 +370,10 @@ body {
   font-weight: 600;
   cursor: pointer;
   width: 100%;
-  transition: background 0.15s;
+  transition: background var(--dur-1) var(--ease-out), border-color var(--dur-1) var(--ease-out);
 }
 
-.btn-secondary:hover { background: var(--border); }
+.btn-secondary:hover { background: var(--surface3); border-color: rgba(255,255,255,0.22); }
 
 /* ── Meta grid ───────────────────────────────────── */
 .meta-grid {

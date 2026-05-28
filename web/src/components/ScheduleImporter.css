@@ -15,7 +15,7 @@
 .si-sheet {
   width: 100%;
   max-height: 92vh;
-  background: var(--bg);
+  background: var(--bg2);
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
   overflow-y: auto;
   padding: 0 0 32px;
@@ -45,7 +45,7 @@
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
-  background: var(--bg);
+  background: rgba(15,22,48,0.92);
   z-index: 1;
 }
 
@@ -94,7 +94,7 @@
 .si-drop-zone:hover,
 .si-drop-zone.drag-over {
   border-color: var(--accent2);
-  background: rgba(124, 58, 237, 0.04);
+  background: rgba(139, 92, 246, 0.10);
 }
 
 .si-drop-icon {
@@ -249,7 +249,7 @@
   height: 20px;
   border-radius: 6px;
   border: 2px solid var(--border2);
-  background: var(--bg);
+  background: var(--bg2);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -373,7 +373,7 @@
   padding: 13px;
   border-radius: var(--radius-m);
   border: 1.5px solid var(--border2);
-  background: var(--bg);
+  background: var(--surface2);
   font-size: 14px;
   font-weight: 600;
   color: var(--text-2);

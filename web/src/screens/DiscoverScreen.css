@@ -15,8 +15,8 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(255,255,255,0.65);
-  border-bottom: 1px solid rgba(17,24,39,0.10);
+  background: rgba(15,22,48,0.72);
+  border-bottom: 1px solid var(--border);
   backdrop-filter: blur(12px);
   display: flex;
   align-items: center;
@@ -72,7 +72,7 @@
 .dc-topbar__cat.active {
   color: var(--text-1);
   font-weight: 700;
-  border-bottom-color: rgba(124,58,237,1);
+  border-bottom-color: var(--accent2);
 }
 
 /* ── Hero slider ─────────────────────────────────── */
@@ -209,8 +209,8 @@
   padding: 10px 16px;
   overflow-x: auto;
   scrollbar-width: none;
-  background: #fff;
-  border-bottom: 1px solid #f5f5f5;
+  background: rgba(15,22,48,0.55);
+  border-bottom: 1px solid var(--border);
 }
 
 .dc-chips::-webkit-scrollbar { display: none; }
@@ -219,21 +219,21 @@
   flex-shrink: 0;
   padding: 6px 14px;
   border-radius: 20px;
-  border: 1.5px solid #e0e0e0;
-  background: #fff;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
   font-size: 12px;
   font-weight: 500;
-  color: #555;
+  color: var(--text-2);
   cursor: pointer;
   transition: all 0.15s;
   white-space: nowrap;
 }
 
-.dc-chip:hover { border-color: #999; color: #1a1a1a; }
+.dc-chip:hover { border-color: var(--border2); color: var(--text-1); }
 
 .dc-chip.on {
-  background: #1a1a1a;
-  border-color: #1a1a1a;
+  background: var(--accent-grad);
+  border-color: rgba(255,255,255,0.16);
   color: #fff;
 }
 
@@ -252,7 +252,7 @@
 .dc-row__title {
   font-size: 18px;
   font-weight: 800;
-  color: #1a1a1a;
+  color: var(--text-1);
   margin: 0;
 }
 
@@ -265,12 +265,12 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  border: 1.5px solid #e0e0e0;
-  background: #fff;
+  border: 1.5px solid var(--border2);
+  background: var(--surface);
   font-size: 18px;
   line-height: 1;
   cursor: pointer;
-  color: #555;
+  color: var(--text-2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -278,9 +278,9 @@
 }
 
 .dc-row__arr:hover {
-  background: #1a1a1a;
+  background: var(--accent-grad);
   color: #fff;
-  border-color: #1a1a1a;
+  border-color: rgba(255,255,255,0.18);
 }
 
 .dc-row__track {
@@ -300,23 +300,25 @@
   width: 200px;
   border-radius: 12px;
   overflow: hidden;
-  background: #fff;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+  background: var(--surface2);
+  box-shadow: var(--shadow-s);
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
   scroll-snap-align: start;
+  border: 1px solid var(--border);
 }
 
 .dc-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  box-shadow: var(--shadow-l);
+  border-color: rgba(139,92,246,0.35);
 }
 
 .dc-card__img-box {
   position: relative;
   height: 140px;
   overflow: hidden;
-  background: #f0ebe0;
+  background: var(--bg2);
 }
 
 .dc-card__img {
@@ -380,14 +382,14 @@
   height: 28px;
   border-radius: 50%;
   border: none;
-  background: rgba(255,255,255,0.9);
+  background: rgba(15,22,48,0.75);
   font-size: 14px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: transform 0.15s;
-  color: #999;
+  color: var(--text-3);
 }
 
 .dc-card__heart:hover { transform: scale(1.2); }
@@ -400,7 +402,7 @@
 .dc-card__cat {
   font-size: 10px;
   font-weight: 600;
-  color: #999;
+  color: var(--text-3);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin: 0 0 4px;
@@ -409,7 +411,7 @@
 .dc-card__title {
   font-size: 13px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--text-1);
   margin: 0 0 4px;
   line-height: 1.3;
   display: -webkit-box;
@@ -420,7 +422,7 @@
 
 .dc-card__desc {
   font-size: 11px;
-  color: #888;
+  color: var(--text-3);
   margin: 0 0 8px;
   line-height: 1.4;
   display: -webkit-box;
@@ -438,15 +440,15 @@
 .dc-card__price {
   font-size: 12px;
   font-weight: 700;
-  color: #1a1a1a;
-  background: #f5f5f5;
+  color: var(--text-1);
+  background: rgba(255,255,255,0.08);
   padding: 3px 8px;
   border-radius: 6px;
 }
 
 .dc-card__dur {
   font-size: 11px;
-  color: #aaa;
+  color: var(--text-3);
 }
 
 /* ── Grid (filtered view) ────────────────────────── */
@@ -483,7 +485,7 @@
 .dc-modal {
   width: 100%;
   max-height: 90vh;
-  background: #fff;
+  background: var(--bg2);
   border-radius: 20px 20px 0 0;
   overflow-y: auto;
   animation: slide-up 0.3s ease;
@@ -564,7 +566,7 @@
 
 .dc-modal__desc {
   font-size: 14px;
-  color: #555;
+  color: var(--text-2);
   line-height: 1.6;
   margin: 0 0 20px;
 }
@@ -577,7 +579,7 @@
 }
 
 .dc-modal__meta-item {
-  background: #f8f8f8;
+  background: var(--surface2);
   border-radius: 10px;
   padding: 10px 12px;
 }
@@ -585,7 +587,7 @@
 .dc-modal__meta-k {
   display: block;
   font-size: 10px;
-  color: #aaa;
+  color: var(--text-3);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -595,7 +597,7 @@
 .dc-modal__meta-v {
   font-size: 14px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--text-1);
 }
 
 .dc-modal__actions {
@@ -617,23 +619,23 @@
 .dc-modal__btn:hover { transform: translateY(-1px); }
 
 .dc-modal__btn--go {
-  background: #1a1a1a;
+  background: var(--accent-grad);
   color: #fff;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  box-shadow: 0 14px 40px rgba(139,92,246,0.18);
 }
 
-.dc-modal__btn--go:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+.dc-modal__btn--go:hover { box-shadow: 0 18px 60px rgba(139,92,246,0.22); }
 
 .dc-modal__btn--save {
-  background: #f5f5f5;
-  color: #555;
+  background: var(--surface2);
+  color: var(--text-2);
   flex: 0 0 auto;
   padding: 14px 20px;
 }
 
 .dc-modal__btn--save.liked {
-  background: #fce4ec;
-  color: #e53935;
+  background: rgba(251, 113, 133, 0.16);
+  color: var(--red);
 }
 
 /* ── Responsive ──────────────────────────────────── */

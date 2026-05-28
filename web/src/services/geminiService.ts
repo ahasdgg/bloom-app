@@ -48,8 +48,10 @@ export type GeminiResponse =
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
-const API_KEY = 'AIzaSyCpylP_3TS0kWAQSdHVWcxwxotoifsgfx0'
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${API_KEY}`
+const API_KEY = (import.meta as any)?.env?.VITE_GEMINI_API_KEY as string | undefined
+const GEMINI_URL = API_KEY
+  ? `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${API_KEY}`
+  : ''
 const TIMEOUT_MS = 60_000
 
 export const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp']
@@ -224,6 +226,16 @@ export async function analyzeScheduleImages(
   files: File[],
   language: 'en' | 'ru' = 'ru',
 ): Promise<GeminiResponse> {
+  if (!API_KEY) {
+    return {
+      ok: false,
+      error: {
+        code: 401,
+        message: language === 'ru' ? 'Не настроен ключ Gemini API (VITE_GEMINI_API_KEY)' : 'Gemini API key is not configured (VITE_GEMINI_API_KEY)',
+      },
+    }
+  }
+
   const controller = new AbortController()
   const timeoutId = setTimeout(() => controller.abort(), TIMEOUT_MS)
 
