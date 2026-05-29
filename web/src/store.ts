@@ -78,12 +78,6 @@ export interface AppState {
   customEvents: CustomEvent[]
   isLoading: boolean
   error: string | null
-  gardenProgress: {
-    totalActivities: number
-    plants: string[]
-    points: number
-    achievements: string[]
-  }
 
   // Custom Events
   addCustomEvent: (event: CustomEvent) => void
@@ -100,7 +94,6 @@ export interface AppState {
   addCompletedActivity: (activity: CompletedActivity) => void
   setLoading: (isLoading: boolean) => void
   setError: (error: string | null) => void
-  updateGardenProgress: (progress: Partial<AppState['gardenProgress']>) => void
   clearError: () => void
   reset: () => void
 
@@ -132,12 +125,6 @@ const initialState = {
   customEvents: [],
   isLoading: false,
   error: null,
-  gardenProgress: {
-    totalActivities: 0,
-    plants: [],
-    points: 0,
-    achievements: [],
-  },
 }
 
 export const useAppStore = create<AppState>()(
@@ -206,13 +193,6 @@ export const useAppStore = create<AppState>()(
 
       setError: (error: string | null) => {
         set({ error })
-      },
-
-      updateGardenProgress: (progress: Partial<AppState['gardenProgress']>) => {
-        const current = get().gardenProgress
-        set({
-          gardenProgress: { ...current, ...progress },
-        })
       },
 
       clearError: () => {

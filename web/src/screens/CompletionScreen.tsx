@@ -4,15 +4,6 @@ import { useAppStore } from '../store'
 import { useTranslation } from '../i18n/useTranslation'
 import './CompletionScreen.css'
 
-interface CompletionData {
-  activityName: string
-  location: string
-  duration: number
-  cost: string
-  category: string
-  imageUrl?: string
-}
-
 export default function CompletionScreen() {
   const navigate = useNavigate()
   const store = useAppStore()
@@ -22,9 +13,7 @@ export default function CompletionScreen() {
   const [recommendation, setRecommendation] = useState<'yes' | 'maybe' | 'no' | null>(null)
   const [showReward, setShowReward] = useState(false)
   const [pointsEarned, setPointsEarned] = useState(0)
-  const [plantUnlocked, setPlantUnlocked] = useState<string | null>(null)
 
-  // Get activity from store or use default
   const activity = store.currentRecommendation?.activity || {
     name: 'Activity',
     location: { name: 'Location' },
@@ -33,38 +22,12 @@ export default function CompletionScreen() {
     category: 'adventure',
   }
 
-  const handleRating = (stars: number) => {
-    setRating(stars)
-  }
-
   const handleSubmit = () => {
-    // Calculate points based on rating and duration
-    const basePoints = Math.floor(store.currentRecommendation?.activity.duration || 60 / 30)
+    const basePoints = Math.floor((store.currentRecommendation?.activity.duration || 60) / 30)
     const ratingBonus = rating * 10
-    const totalPoints = basePoints + ratingBonus
+    const total = basePoints + ratingBonus
+    setPointsEarned(total)
 
-    setPointsEarned(totalPoints)
-
-    // Determine if plant is unlocked (every 100 points)
-    const currentPoints = store.gardenProgress.points
-    const newTotal = currentPoints + totalPoints
-    if (Math.floor(newTotal / 100) > Math.floor(currentPoints / 100)) {
-      const plants = ['🌱', '🌿', '🌾', '🌳', '🌲', '🎋', '🌴', '🌵']
-      setPlantUnlocked(plants[Math.floor(newTotal / 100) % plants.length])
-    }
-
-    // Update garden progress
-    store.updateGardenProgress({
-      totalActivities: store.gardenProgress.totalActivities + 1,
-      points: newTotal,
-      achievements: updateAchievements(
-        store.gardenProgress.achievements,
-        store.gardenProgress.totalActivities + 1,
-        rating
-      ),
-    })
-
-    // Add to completed activities (not just history)
     if (store.currentRecommendation) {
       store.addCompletedActivity({
         ...store.currentRecommendation,
@@ -72,7 +35,7 @@ export default function CompletionScreen() {
         rating,
         feedback,
         recommendation: recommendation || 'yes',
-        pointsEarned,
+        pointsEarned: total,
         completedAt: Date.now(),
       })
     }
@@ -80,47 +43,10 @@ export default function CompletionScreen() {
     setShowReward(true)
   }
 
-  const updateAchievements = (
-    current: string[],
-    totalActivities: number,
-    rating: number
-  ): string[] => {
-    const achievements = [...current]
-
-    // Milestone achievements
-    if (totalActivities === 1 && !achievements.includes('first_activity')) {
-      achievements.push('first_activity')
-    }
-    if (totalActivities === 5 && !achievements.includes('five_activities')) {
-      achievements.push('five_activities')
-    }
-    if (totalActivities === 10 && !achievements.includes('ten_activities')) {
-      achievements.push('ten_activities')
-    }
-
-    // Rating achievements
-    if (rating === 5 && !achievements.includes('perfect_rating')) {
-      achievements.push('perfect_rating')
-    }
-
-    return achievements
-  }
-
-  const getAchievementName = (id: string): string => {
-    const names: Record<string, string> = {
-      first_activity: '🌱 First Step',
-      five_activities: '🌿 Growing',
-      ten_activities: '🌳 Flourishing',
-      perfect_rating: '⭐ Perfect Day',
-    }
-    return names[id] || id
-  }
-
   const handleContinue = () => {
-    // ✅ НОВОЕ: Full state reset
     store.setCurrentRecommendation(null)
-    store.clearCurrentActivity()  // ← Hard reset
-    navigate('/garden')
+    store.clearCurrentActivity()
+    navigate('/path')
   }
 
   if (showReward) {
@@ -138,40 +64,16 @@ export default function CompletionScreen() {
               <div className="points-label">{t('pointsEarned')}</div>
             </div>
 
-            {plantUnlocked && (
-              <div className="plant-unlocked">
-                <div className="plant-emoji">{plantUnlocked}</div>
-                <div className="plant-label">{t('newPlantUnlocked')}</div>
-              </div>
-            )}
-
-            {store.gardenProgress.achievements.length > 0 && (
-              <div className="achievements-section">
-                <h3 className="achievements-title">{t('yourAchievements')}</h3>
-                <div className="achievements-list">
-                  {store.gardenProgress.achievements.map((achievement, idx) => (
-                    <div key={idx} className="achievement-badge">
-                      {getAchievementName(achievement)}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
             <div className="stats-section">
               <div className="stat-item">
                 <span className="stat-label">{t('totalActivities')}</span>
-                <span className="stat-value">{store.gardenProgress.totalActivities}</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-label">{t('totalPoints')}</span>
-                <span className="stat-value">{store.gardenProgress.points}</span>
+                <span className="stat-value">{store.completedActivities.length}</span>
               </div>
             </div>
           </div>
 
           <button className="button primary-button" onClick={handleContinue}>
-            {t('viewYourGarden')}
+            {t('path')} →
           </button>
         </div>
       </div>
@@ -183,11 +85,7 @@ export default function CompletionScreen() {
       <div className="completion-container">
         <h1 className="completion-title">{t('howWasYourActivity')}</h1>
 
-        {/* Activity Summary */}
         <div className="activity-summary">
-          {activity.imageUrl && (
-            <img src={activity.imageUrl} alt={activity.name} className="summary-image" />
-          )}
           <div className="summary-info">
             <h2 className="summary-name">{activity.name}</h2>
             <p className="summary-location">📍 {activity.location.name}</p>
@@ -198,7 +96,6 @@ export default function CompletionScreen() {
           </div>
         </div>
 
-        {/* Rating Section */}
         <div className="rating-section">
           <h3 className="rating-label">{t('rateYourExperience')}</h3>
           <div className="stars-container">
@@ -206,7 +103,7 @@ export default function CompletionScreen() {
               <button
                 key={star}
                 className={`star ${rating >= star ? 'active' : ''}`}
-                onClick={() => handleRating(star)}
+                onClick={() => setRating(star)}
               >
                 ⭐
               </button>
@@ -222,7 +119,6 @@ export default function CompletionScreen() {
           </p>
         </div>
 
-        {/* Feedback Section */}
         <div className="feedback-section">
           <label className="feedback-label">{t('shareYourThoughts')}</label>
           <textarea
@@ -234,23 +130,22 @@ export default function CompletionScreen() {
           />
         </div>
 
-        {/* Would You Recommend */}
         <div className="recommend-section">
           <h3 className="recommend-label">{t('wouldYouRecommend')}</h3>
           <div className="recommend-buttons">
-            <button 
+            <button
               className={`recommend-button yes ${recommendation === 'yes' ? 'selected' : ''}`}
               onClick={() => setRecommendation('yes')}
             >
               👍 {t('yes')}
             </button>
-            <button 
+            <button
               className={`recommend-button maybe ${recommendation === 'maybe' ? 'selected' : ''}`}
               onClick={() => setRecommendation('maybe')}
             >
               🤔 {t('maybe')}
             </button>
-            <button 
+            <button
               className={`recommend-button no ${recommendation === 'no' ? 'selected' : ''}`}
               onClick={() => setRecommendation('no')}
             >
@@ -259,7 +154,6 @@ export default function CompletionScreen() {
           </div>
         </div>
 
-        {/* Submit Button */}
         <button
           className="button primary-button submit-button"
           onClick={handleSubmit}

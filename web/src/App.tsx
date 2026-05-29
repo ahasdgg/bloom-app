@@ -5,7 +5,6 @@ import SeedScreen from './screens/SeedScreen'
 import BloomScreen from './screens/BloomScreen'
 import ActiveScreen from './screens/ActiveScreen'
 import PathScreen from './screens/PathScreen'
-import GardenScreen from './screens/GardenScreen'
 import SettingsScreen from './screens/SettingsScreen'
 import CompletionScreen from './screens/CompletionScreen'
 import DiscoverScreen from './screens/DiscoverScreen'
@@ -46,7 +45,6 @@ function App() {
           <Route path="/active" element={<ActiveScreen />} />
           <Route path="/path" element={<PathScreen />} />
           <Route path="/chat" element={<ChatScreen />} />
-          <Route path="/garden" element={<GardenScreen />} />
           <Route path="/settings" element={<SettingsScreen />} />
           <Route path="/completion" element={<CompletionScreen />} />
         </Routes>

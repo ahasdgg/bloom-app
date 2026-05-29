@@ -47,7 +47,8 @@ interface ExtractedEvent {
 
 // ─── Gemini text analysis ─────────────────────────────────────────────────────
 
-const API_KEY = (import.meta as any)?.env?.VITE_GEMINI_API_KEY as string | undefined
+const CHAT_API_KEY = ((import.meta as any)?.env?.VITE_GEMINI_API_KEY as string | undefined)
+  || 'AIzaSyCpylP_3TS0kWAQSdHVWcxwxotoifsgfx0'
 
 const TEXT_PROMPT = `Ты — ассистент Bloom App. Пользователь описывает своё расписание текстом. 
 Извлеки все события и верни ТОЛЬКО чистый JSON без дополнительного текста:
@@ -58,11 +59,7 @@ const TEXT_PROMPT = `Ты — ассистент Bloom App. Пользовате
 Цвета подбирай сам по смыслу события.`
 
 async function analyzeText(text: string): Promise<ImportResult> {
-  if (!API_KEY) {
-    throw new Error('Gemini API key is not configured (VITE_GEMINI_API_KEY)')
-  }
-
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${API_KEY}`
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${CHAT_API_KEY}`
   const body = {
     contents: [{
       parts: [
