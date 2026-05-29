@@ -45,7 +45,7 @@
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
-  background: rgba(15,22,48,0.92);
+  background: rgba(10,10,10,0.95);
   z-index: 1;
 }
 

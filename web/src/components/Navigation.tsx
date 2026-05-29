@@ -39,11 +39,6 @@ const Navigation: React.FC = () => {
         <span className="nav-label">{t('discover')}</span>
       </Link>
 
-      <Link to="/garden" className={`nav-item ${isActive('/garden') ? 'active' : ''}`}>
-        <span className="nav-icon">🌿</span>
-        <span className="nav-label">{t('garden')}</span>
-      </Link>
-
       <Link to="/settings" className={`nav-item ${isActive('/settings') ? 'active' : ''}`}>
         <span className="nav-icon">⚙️</span>
         <span className="nav-label">{t('settings')}</span>

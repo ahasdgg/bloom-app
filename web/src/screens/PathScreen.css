@@ -13,8 +13,9 @@
   justify-content: space-between;
   padding: 20px 16px 12px;
   border-bottom: 1px solid var(--border);
-  background: rgba(15,22,48,0.72);
+  background: rgba(10,10,10,0.85);
   backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .header-title {

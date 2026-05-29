@@ -16,44 +16,44 @@
    ═══════════════════════════════════════════════════ */
 
 :root {
-  --bg0:      #070A12;
-  --bg:       #0B1020;
-  --bg2:      #0F1630;
-  --surface:  rgba(255,255,255,0.06);
-  --surface2: rgba(255,255,255,0.09);
-  --surface3: rgba(255,255,255,0.12);
-  --border:   rgba(255,255,255,0.10);
-  --border2:  rgba(255,255,255,0.16);
-  --text-1:   #EEF2FF;
-  --text-2:   rgba(238,242,255,0.74);
-  --text-3:   rgba(238,242,255,0.50);
+  --bg0:      #000000;
+  --bg:       #0a0a0a;
+  --bg2:      #111111;
+  --surface:  rgba(255,255,255,0.05);
+  --surface2: rgba(255,255,255,0.08);
+  --surface3: rgba(255,255,255,0.11);
+  --border:   rgba(255,255,255,0.08);
+  --border2:  rgba(255,255,255,0.13);
+  --text-1:   #ededed;
+  --text-2:   rgba(237,237,237,0.72);
+  --text-3:   rgba(237,237,237,0.44);
 
-  --accent:   #6D28D9;
-  --accent2:  #8B5CF6;
-  --accent3:  #22D3EE;
-  --accent-grad: linear-gradient(135deg, #8B5CF6 0%, #22D3EE 100%);
+  --accent:   #ededed;
+  --accent2:  #00c950;  /* green — Resend style */
+  --accent3:  #00a8ff;  /* blue */
+  --accent-grad: linear-gradient(135deg, #00c950 0%, #00a8ff 100%);
 
-  --red:      #ef4444;
-  --green:    #22c55e;
-  --gold:     #b8944e;
-  --gold-bg:  rgba(184,148,78,0.10);
+  --red:      #ff4444;
+  --green:    #00c950;
+  --gold:     #f5a623;
+  --gold-bg:  rgba(245,166,35,0.10);
 
-  --radius-s: 10px;
-  --radius-m: 14px;
-  --radius-l: 18px;
-  --radius-xl:24px;
+  --radius-s: 8px;
+  --radius-m: 10px;
+  --radius-l: 14px;
+  --radius-xl:18px;
 
-  --shadow-s: 0 1px 2px rgba(17,24,39,0.05), 0 6px 18px rgba(17,24,39,0.06);
-  --shadow-m: 0 10px 30px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.05) inset;
-  --shadow-l: 0 22px 70px rgba(0,0,0,0.55), 0 1px 0 rgba(255,255,255,0.06) inset;
+  --shadow-s: 0 1px 2px rgba(0,0,0,0.6), 0 4px 12px rgba(0,0,0,0.4);
+  --shadow-m: 0 4px 16px rgba(0,0,0,0.7), 0 1px 0 rgba(255,255,255,0.04) inset;
+  --shadow-l: 0 16px 48px rgba(0,0,0,0.8), 0 1px 0 rgba(255,255,255,0.05) inset;
 
   --dur-1: 140ms;
   --dur-2: 240ms;
   --dur-3: 320ms;
   --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
-  --ring: 0 0 0 2px rgba(139,92,246,0.40), 0 0 0 6px rgba(139,92,246,0.14);
+  --ring: 0 0 0 2px rgba(0,201,80,0.35), 0 0 0 5px rgba(0,201,80,0.12);
 
-  --nav-h:    64px;
+  --nav-h:    60px;
   --font:     ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
@@ -70,11 +70,7 @@ select:focus-visible {
 
 body {
   font-family: var(--font);
-  background:
-    radial-gradient(1200px 600px at 15% -10%, rgba(139,92,246,0.22), transparent 55%),
-    radial-gradient(1000px 520px at 105% 10%, rgba(34,211,238,0.18), transparent 50%),
-    radial-gradient(900px 520px at 50% 110%, rgba(184,148,78,0.10), transparent 55%),
-    var(--bg0);
+  background: var(--bg);
   color: var(--text-1);
   margin: 0;
 }

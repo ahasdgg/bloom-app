@@ -17,8 +17,9 @@
   justify-content: space-between;
   padding: 14px 16px 12px;
   border-bottom: 1px solid var(--border);
-  background: rgba(15,22,48,0.72);
+  background: rgba(10,10,10,0.90);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   flex-shrink: 0;
 }
 
@@ -261,7 +262,7 @@
 .chat-input-area {
   flex-shrink: 0;
   border-top: 1px solid var(--border);
-  background: rgba(15,22,48,0.82);
+  background: rgba(10,10,10,0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   padding: 8px 12px;
