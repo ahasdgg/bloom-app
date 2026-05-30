@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useAppStore } from '../store'
 import { useTranslation } from '../i18n/useTranslation'
 import './SettingsScreen.css'
+import ThemeToggle from '../components/ThemeToggle'
 
 const ACTIVITY_CATEGORIES = [
   'hiking',
@@ -161,6 +162,17 @@ export default function SettingsScreen() {
             >
               🇷🇺 Русский
             </button>
+          </div>
+        </div>
+
+        {/* Theme Section */}
+        <div className="settings-section">
+          <h2 className="section-title">{t('theme') || 'Theme'}</h2>
+          <div className="theme-item">
+            <label className="setting-label">{t('theme')}</label>
+            <div>
+              <ThemeToggle inline />
+            </div>
           </div>
         </div>
 

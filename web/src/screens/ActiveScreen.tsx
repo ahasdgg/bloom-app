@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react'
+import React, { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppStore, ActiveActivity } from '../store'
 import { useTranslation } from '../i18n/useTranslation'
@@ -9,7 +9,6 @@ export default function ActiveScreen() {
   const store = useAppStore()
   const { t } = useTranslation()
   const activeActivities = store.activeActivities
-  const currentActivity = store.currentActivity
 
   const handleAutoComplete = useCallback(
     (activity: ActiveActivity) => {

@@ -14,16 +14,15 @@ import './theme.css'
 import './App.css'
 
 function App() {
-  const store = useAppStore()
+  const { userId, setUserId } = useAppStore()
   const [isInitialized, setIsInitialized] = useState(false)
 
   useEffect(() => {
-    // Initialize app
-    if (!store.userId) {
-      store.setUserId('user_' + Date.now())
+    if (!userId) {
+      setUserId('user_' + Date.now())
     }
     setIsInitialized(true)
-  }, [])
+  }, [setUserId, userId])
 
   if (!isInitialized) {
     return (

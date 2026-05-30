@@ -1,7 +1,7 @@
 // ═══════════════════════════════════════════════════════════════
 //  Offer Catalog — все возможные AI-предложения по уровням
 // ═══════════════════════════════════════════════════════════════
-import type { AIEvent, BoldnessLevel, CostType, AgeGroup } from './types'
+import type { AIEvent } from './types'
 
 type OfferTemplate = Omit<AIEvent, 'kind' | 'id' | 'startTs' | 'endTs'>
 
