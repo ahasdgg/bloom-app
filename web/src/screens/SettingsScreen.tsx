@@ -68,7 +68,7 @@ export default function SettingsScreen() {
       if (theme === DARK_THEME) document.documentElement.setAttribute('data-theme', DARK_THEME)
       else document.documentElement.removeAttribute('data-theme')
       localStorage.setItem('theme', theme)
-    } catch {}
+    } catch { /* ignore */ }
   }, [theme])
 
   const handleClearHistory = () => {
