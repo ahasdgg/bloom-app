@@ -62,7 +62,35 @@
 
 .language-button.active {
   background: var(--accent2);
-  color: #000;
+  color: var(--text-1);
+  border-color: var(--accent2);
+  font-weight: 700;
+}
+
+/* Theme buttons */
+.theme-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.theme-button {
+  flex: 1;
+  padding: 12px;
+  border: 1.5px solid var(--border2);
+  border-radius: var(--radius-m);
+  background: var(--bg);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-2);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.theme-button:hover { border-color: var(--accent); color: var(--text-1); }
+
+.theme-button.active {
+  background: var(--accent2);
+  color: var(--text-1);
   border-color: var(--accent2);
   font-weight: 700;
 }
@@ -130,7 +158,7 @@
   text-transform: capitalize;
 }
 
-.category-button.active .category-name { color: #000; font-weight: 700; }
+.category-button.active .category-name { color: var(--text-1); font-weight: 700; }
 
 /* Budget */
 .budget-container {

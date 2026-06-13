@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useAppStore } from '../store'
 import { useTranslation } from '../i18n/useTranslation'
 import './SettingsScreen.css'
-import ThemeToggle from '../components/ThemeToggle'
+
+const DARK_THEME = 'dark-green'
 
 const ACTIVITY_CATEGORIES = [
   'hiking',
@@ -57,6 +58,18 @@ export default function SettingsScreen() {
   const [clearConfirm, setClearConfirm] = useState(false)
   const [cleared, setCleared] = useState(false)
   const isRu = store.language === 'ru'
+
+  const [theme, setTheme] = useState<string>(() => {
+    try { return localStorage.getItem('theme') ?? '' } catch { return '' }
+  })
+
+  useEffect(() => {
+    try {
+      if (theme === DARK_THEME) document.documentElement.setAttribute('data-theme', DARK_THEME)
+      else document.documentElement.removeAttribute('data-theme')
+      localStorage.setItem('theme', theme)
+    } catch {}
+  }, [theme])
 
   const handleClearHistory = () => {
     store.reset()
@@ -168,11 +181,19 @@ export default function SettingsScreen() {
         {/* Theme Section */}
         <div className="settings-section">
           <h2 className="section-title">{t('theme') || 'Theme'}</h2>
-          <div className="theme-item">
-            <label className="setting-label">{t('theme')}</label>
-            <div>
-              <ThemeToggle inline />
-            </div>
+          <div className="theme-buttons">
+            <button
+              className={`theme-button ${theme !== DARK_THEME ? 'active' : ''}`}
+              onClick={() => setTheme('')}
+            >
+              ⚪ Light
+            </button>
+            <button
+              className={`theme-button ${theme === DARK_THEME ? 'active' : ''}`}
+              onClick={() => setTheme(DARK_THEME)}
+            >
+              🟢 Dark
+            </button>
           </div>
         </div>
 
